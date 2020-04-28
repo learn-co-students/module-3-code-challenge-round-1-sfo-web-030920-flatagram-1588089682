@@ -19,12 +19,9 @@ function renderData(post) {
   let imgHeader = document.querySelector(".image");
 
   //Elements
-
   titleHeader.textContent = title;
   likesHeader.textContent = `${likes} likes`;
   imgHeader.src = `${image}`;
-  console.log(image);
-  console.log(imgHeader);
   renderComments(comments);
 }
 
@@ -41,12 +38,10 @@ function renderComments(arr) {
 const likeBtn = document.querySelector(".like-button");
 likeBtn.addEventListener("click", updateLikes);
 function updateLikes() {
-  console.log("calling update likes");
   let likesValue = document.querySelector(".likes");
   likesValue = likesValue.textContent.split(" ")[0];
 
   let total = parseInt(likesValue) + 1;
-  console.log(total);
   const comment = {
     likes: total,
   };
@@ -63,25 +58,49 @@ function updateLikes() {
     .then((data) => {
       const likesHeader = document.querySelector(".likes");
       likesHeader.textContent = `${data.likes} likes`;
-      console.log(data);
     });
 }
 
 function addButton() {
   const commentForm = document.querySelector(".comment-form");
-  commentForm.addEventListener("click", (e) => {
-    e.preventDefault();
 
+  commentForm.addEventListener("submit", (e) => {
+    e.preventDefault();
     const inputText = document.querySelector(".comment-input");
     let commentsHeader = document.querySelector(".comments");
     const hacheErre = document.createElement("hr");
     const liItem = document.createElement("li");
+
     if (inputText.value === "") return;
     liItem.textContent = inputText.value;
     commentsHeader.append(liItem);
     liItem.append(hacheErre);
+    createComment(inputText.value);
     commentForm.reset();
   });
 }
 
 addButton();
+
+// function createComment(comment) {
+//   console.log(comment);
+
+//   const commentContent = {
+//     content: comment,
+//   };
+
+//   const commentObj = {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(comment),
+//   }
+//   fetch(url, commentObj)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       const likesHeader = document.querySelector(".likes");
+//       likesHeader.textContent = `${data.likes} likes`;
+//       console.log(data);
+//     });
+// }
