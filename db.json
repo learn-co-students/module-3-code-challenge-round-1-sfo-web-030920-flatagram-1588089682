@@ -1,12 +1,21 @@
 {
   "image": {
     "title": "Coder dog",
-    "likes": 0,
+    "likes": 21,
     "image": "./assets/coder-dog.png",
     "comments": [
-      { "id": 1, "content": "What a cute dog!" },
-      { "id": 2, "content": "He has a nose for this!" },
-      { "id": 3, "content": "Woof!" }
+      {
+        "id": 1,
+        "content": "What a cute dog!"
+      },
+      {
+        "id": 2,
+        "content": "He has a nose for this!"
+      },
+      {
+        "id": 3,
+        "content": "Woof!"
+      }
     ]
   }
 }
