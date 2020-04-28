@@ -38,29 +38,34 @@ function renderComments(arr) {
     commentItem.appendChild(hacheErre);
   });
 }
+const likeBtn = document.querySelector(".like-button");
+likeBtn.addEventListener("click", updateLikes);
+function updateLikes() {
+  console.log("calling update likes");
+  let likesValue = document.querySelector(".likes");
+  likesValue = likesValue.textContent.split(" ")[0];
 
-// function createComment() {
-//   const commentForm = document.querySelector(".comment-form");
-//   commentForm.addEventListener("submit", function (e) {
-//     e.preventDefault();
-//     const inputText = document.querySelector(".comment-input");
-//     const comment = {
-//       content: inputText.value,
-//     };
-//     const commentObj = {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(comment),
-//     };
+  let total = parseInt(likesValue) + 1;
+  console.log(total);
+  const comment = {
+    likes: total,
+  };
+  const commentObj = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(comment),
+  };
 
-//     fetch(url, commentObj)
-//       .then((response) => response.json())
-//       .then((data) => console.log(data));
-//   });
-// }
-// createComment();
+  fetch(url, commentObj)
+    .then((response) => response.json())
+    .then((data) => {
+      const likesHeader = document.querySelector(".likes");
+      likesHeader.textContent = `${data.likes} likes`;
+      console.log(data);
+    });
+}
 
 function addButton() {
   const commentForm = document.querySelector(".comment-form");
